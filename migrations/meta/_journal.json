@@ -1,0 +1,34 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1708973690311,
+      "tag": "0000_violet_blue_shield",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1708999193202,
+      "tag": "0001_square_mentor",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1709000287513,
+      "tag": "0002_right_gambit",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1709046798038,
+      "tag": "0003_free_impossible_man",
+      "breakpoints": true
+    }
+  ]
+}
