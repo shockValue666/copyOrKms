@@ -10,7 +10,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-const page = () => {
+const Page = () => {
   const [subject,setSubject] = useState<string>("racism in the 21st century");
     const aiprovider = useContext(AiContext)
     useEffect(()=>{
@@ -79,7 +79,7 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
 
 
 // "use client";

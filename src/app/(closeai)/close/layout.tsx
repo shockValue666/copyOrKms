@@ -9,7 +9,7 @@ interface LayoutProps{
     children:React.ReactNode
 }
 
-const layout:React.FC<LayoutProps> = ({
+const Layout:React.FC<LayoutProps> = ({
     children
 }) => {
   const [aictx,setAictx] = useState(0)
@@ -26,7 +26,4 @@ const layout:React.FC<LayoutProps> = ({
   )
 }
 
-export default layout
-
-
-//otan psaxnw files, kalo tha itan na ksekinaw apo to layout.tsx kai meata na pigainw page.tsx
+export default Layout
