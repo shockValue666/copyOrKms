@@ -3,7 +3,7 @@ import React from 'react'
 interface TitleSectionProps{
     title: string;
     subheading?:string;
-    pill:string;
+    pill?:string;
 }
 
 //type of props of title
@@ -31,12 +31,12 @@ const TitleSection:React.FC<TitleSectionProps> = ({title,subheading
             dark:from-brand-primaryBlue
             dark:to-brand-primaryPurple'
             >
-                <div className='rounded-full
+                {pill && (<div className='rounded-full
                 px-3
                 py-1
                 dark:bg-black'>
                     {pill}
-                </div>
+                </div>)}
             </article>
             {
                 subheading ? <>
