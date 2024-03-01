@@ -17,19 +17,19 @@ import { Button } from '@/components/ui/button'
 
 const Dashboard = async () => {
 
-  const supabase  = createServerComponentClient({cookies})
-  const {
-    data:{user}
-  } = await supabase.auth.getUser();
+  // const supabase  = createServerComponentClient({cookies})
+  // const {
+  //   data:{user}
+  // } = await supabase.auth.getUser();
 
 
-  if(!user) return;
+  // if(!user) return;
   // const workspace=await db.query.workspaces.findFirst({
   //   where:(workspace,{eq})=>eq(workspace.workspaceOwner,user.id)
   // })
 
-  const {data:subscription,error:subscriptionError} = await getUserSubscriptionStatus(user.id);
-  if(subscriptionError) return;
+  // const {data:subscription,error:subscriptionError} = await getUserSubscriptionStatus(user.id);
+  // if(subscriptionError) return;
 
 
    if(true){

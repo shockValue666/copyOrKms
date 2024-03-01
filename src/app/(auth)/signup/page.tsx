@@ -9,7 +9,7 @@ import { useRouter, useSearchParams } from 'next/navigation' //
 //it returns a value which si the current params, and a function to modify them.
 //THIS MEANS I CAN CHANGE THE URL
 //SAUCE: THIS MEANS THAT I CAN CREATE A URL SHORTNR SAAS??????
-import React, { useMemo, useState } from 'react'//
+import React, { useMemo, useState,Suspense } from 'react'//
 //use memo is a React Hook that lets you cache the result of a calculation between re-renders? idk why we need to
 //cache the result of a calculation between re-renders?
 import { useForm } from 'react-hook-form';
@@ -25,7 +25,7 @@ import Image from 'next/image'
 import Logo from '../../../../public/images/cypresslogo.svg'
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import Loader from "@/components/globals/Loader";
+import Loader from '@/components/globals/Loader'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { MailCheck } from 'lucide-react';//
 //if there is no codeexchangeerror this means but confirmation exists then we use this icon
@@ -38,8 +38,8 @@ import { actionSignUpUser } from '@/lib/server-actions/auth-actions';
 //just like we could do with interface
 const SignupFormSchema = z.object({
     email:z.string().describe('Email').email({message:"Invaddid email"}),
-    password:z.string().describe("Password").min(6,"PASSWORD mus have 6 characters"),
-    confirmPassword:z.string().describe("Confirm Password").min(6,"password must have 6 characters")
+    password:z.string().describe("Password").min(6,"PASSWORD mus have something"),
+    confirmPassword:z.string().describe("Confirm Password").min(6,"password mus")
 }).refine((data)=>data.password===data.confirmPassword,{
     message:"Password don't match",
     path:['confirmPassword']
@@ -89,7 +89,7 @@ const Signup = () => {
     //e.g.: register, unregister, formState, handleSubmit etc.
     const form = useForm<z.infer<typeof SignupFormSchema>>({
         mode:"onChange", //behaviour before submit
-        reValidateMode:"onSubmit", //behaviour after input gets revalidated
+        reValidateMode:"onChange", //behaviour after input gets revalidated
         resolver:zodResolver(SignupFormSchema),
         defaultValues:{
             email:"",
@@ -111,7 +111,8 @@ const Signup = () => {
             return;
         }
         setConfirmation(true);
-        router.replace("/dashboard")
+        //we don't have email validation yet so i will redirecto to dashboard
+        router.push("/dashboard");
     }
 
   return (
@@ -192,35 +193,35 @@ const Signup = () => {
                     </Button>
                 </>
             )}
-            {submitError && <FormMessage>{submitError}</FormMessage>}
-            <span className="self-container">
-                Already have an account?{' '}
-                <Link
-                    // href="/login"
-                    href="/"
-                    className="text-primary"
-                >
-                    Login
-                </Link>
-            </span>
-            {
-                (confirmation || codeExchangeError) && 
-                    <>
-                        <Alert className={confirmationAndErrorStyles}>  
-                            {!codeExchangeError && (
-                                
-                                <MailCheck className='h-4 w-4'/>
-                            )}
-                                <AlertTitle>
-                                    {codeExchangeError ? "Invalid Link" : "Check your email"}
-                                </AlertTitle>
-                                <AlertDescription>
-                                    {codeExchangeError || "an email confirmation has been sent"}
-                                </AlertDescription>
-                        </Alert>
-                    
-                    </>
-            }
+            
+                {submitError && <FormMessage>{submitError}</FormMessage>}
+                <span className="self-container">
+                    Already have an account?{' '}
+                    <Link
+                        href="/login"
+                        className="text-primary"
+                    >
+                        Login
+                    </Link>
+                </span>
+                {
+                    (confirmation || codeExchangeError) && 
+                        <>
+                            <Alert className={confirmationAndErrorStyles}>  
+                                {!codeExchangeError && (
+                                    
+                                    <MailCheck className='h-4 w-4'/>
+                                )}
+                                    <AlertTitle>
+                                        {codeExchangeError ? "Invalid Link" : "Check your email"}
+                                    </AlertTitle>
+                                    <AlertDescription>
+                                        {codeExchangeError || "an email confirmation has been sent"}
+                                    </AlertDescription>
+                            </Alert>
+                        
+                        </>
+                }
         </form>
     </Form> 
   )
