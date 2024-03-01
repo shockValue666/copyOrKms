@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/lib/providers/next-theme-provider";
+import { SupabaseUserProvider } from "@/lib/providers/supabase-user-provider";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,7 +22,9 @@ export default function RootLayout({
       <body className={inter.className}>
         {/* the nexttheme creates the warning on the frontend */}
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            {children}
+            <SupabaseUserProvider>
+              {children}
+            </SupabaseUserProvider>
           </ThemeProvider>
       </body>
     </html>

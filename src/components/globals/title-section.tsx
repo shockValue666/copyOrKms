@@ -41,8 +41,8 @@ const TitleSection:React.FC<TitleSectionProps> = ({title,subheading
             {
                 subheading ? <>
                     <h2 className='text-left
-                    text-3xl
-                    sm:text-5xl
+                    text-2xl
+                    sm:text-3xl
                     sm:max-w-[750px]
                     md:text-center
                     font-semibold

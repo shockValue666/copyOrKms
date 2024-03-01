@@ -1,23 +1,39 @@
-import { PgTable,integer,pgTable,serial,text,timestamp,varchar } from "drizzle-orm/pg-core";
+import { PgTable,integer,pgTable,uuid,text,timestamp,varchar } from "drizzle-orm/pg-core";
 
 
 
-export const users = pgTable("users",{
-    id:serial('id').primaryKey(),
+export const profiles = pgTable("profiles",{
+    id:uuid('id').defaultRandom().primaryKey().notNull(),//edw einai to provilma me to id lol
+    referenceId:varchar('reference_id',{length:256}),
     fullName:text('full_name'),
     phone:varchar('phone',{length:256})
 })
 
-export const posts = pgTable("posts",{
-    id:serial('id').primaryKey(),
-    title:varchar('title',{length:256}),
-    content:text('content'),    
-    createdAt:timestamp('created_at').notNull().defaultNow(),
-    createdBy:integer('created_by').references(()=>users.id)
-})
+export const folders = pgTable("folders",{
+    id:uuid('id').defaultRandom().primaryKey().notNull(),
+    createdAt:timestamp("created_at",{
+        withTimezone:true,
+        mode:"string"        
+    }).defaultNow().notNull(),
+    title:text('title').notNull(),
+    iconId:text('icon_id').notNull(),
+    data:text('data'),
+    inTrash:text("in_trash"),
+    bannerUrl:text("banner_url"),
+    folderOwner:uuid('folder_owner').notNull().references(()=>profiles.id,{onDelete:"cascade"}),
+});
 
-export const comments = pgTable("comments",{
-    id:serial('id').primaryKey(),
-    postId:integer('post_id').references(()=>posts.id),
-    content:text('content')
+
+export const files = pgTable("files",{
+    id:uuid('id').defaultRandom().primaryKey().notNull(),
+    createdAt:timestamp("created_at",{
+        withTimezone:true,
+        mode:"string"        
+    }).defaultNow().notNull(),
+    title:text('title').notNull(),
+    iconId:text('icon_id').notNull(),
+    data:text('data'),
+    inTrash:text("in_trash"),
+    bannerUrl:text("banner_url"),
+    folderId:uuid('folder_id').notNull().references(()=>folders.id,{onDelete:"cascade"}),
 })

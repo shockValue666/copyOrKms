@@ -21,9 +21,9 @@ const page = () => {
   };
   
   return (
-    <div className='flex flex-col justify-center items-center w-full '>
+    <div className='flex flex-col justify-center items-center w-full overflow-x-hidden'>
       <div className='my-[2%] '>
-        <TitleSection subheading='' title='' pill='Take notes fast and efficiently ✨ ' />
+        <TitleSection subheading='' title='' pill='Supercharge your note-taking with AI-powered autocomplete ✨ ' />
       </div>
       <MainShit/>
       <div>
@@ -35,9 +35,9 @@ const page = () => {
         </button>
       </div>
       <div>
-        <div className='sm:w-full w-full flex justify-center items-center sm:ml-0 ml-[-50px]'>
             <Image src={Banner} alt={'Application Banner'}/>
-            <div className='bottom-0 bg-gradient-to-t left-0 right-0 absolute z-10'>
+            <div className='sm:w-full w-full flex justify-center items-center sm:ml-0 ml-[-50px]'>
+            <div className='bottom-0 bg-gradient-to-t left-0 right-0  z-10 absolute'>
             </div>
           </div>
       </div>
@@ -109,7 +109,8 @@ const page = () => {
             </div>
           </section>
       </div>
-      <div>
+      <div className='my-4'>
+        <TitleSection subheading='' title='Unlock your productivity' pill='Testimonialss' />
         {/* <SelfGeneratingShit/> */}
       </div>
     </div>

@@ -9,6 +9,7 @@ import { z } from 'zod';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 const Page = () => {
   const [subject,setSubject] = useState<string>("racism in the 21st century");
@@ -32,6 +33,16 @@ const Page = () => {
     }
 
     const [text,setText] = useState<string>("")
+
+    const supabase = createClientComponentClient();
+    useEffect(()=>{
+      let user;
+        const getUser = async () => {
+          user = await supabase.auth.getUser();
+          console.log('user: ', user)
+        }
+        getUser();
+    },[supabase])
   return (
     <div className='flex flex-col justify-center items-center w-full my-16 gap-8'>
 
