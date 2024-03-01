@@ -9,7 +9,7 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 // import React, {useEffect} from 'react'
 
 import { cookies } from 'next/headers'
-import {db} from '@/lib/supabase/db'
+// import db from '@/lib/supabase/db'
 import { redirect } from 'next/navigation'
 import { getUserSubscriptionStatus } from '@/lib/supabase/queries'
 // import DashboardSetup from '@/components/dashboard-setup/dashboard-setup'
@@ -23,25 +23,24 @@ const Dashboard = async () => {
   } = await supabase.auth.getUser();
 
 
-  // if(!user) return;
+  if(!user) return;
   // const workspace=await db.query.workspaces.findFirst({
   //   where:(workspace,{eq})=>eq(workspace.workspaceOwner,user.id)
   // })
 
-  // const {data:subscription,error:subscriptionError} = await getUserSubscriptionStatus(user.id);
-  // if(subscriptionError) return;
+  const {data:subscription,error:subscriptionError} = await getUserSubscriptionStatus(user.id);
+  if(subscriptionError) return;
 
 
-  // if(!workspace){
+   if(true){
     return (
       <div className='bg-background h-screen w-screen flex justify-center items-center border border-green-500'>
         <div>
         {/* <DashboardSetup user={user} subscription={subscription}></DashboardSetup> */}
-        dashboard
         </div>
       </div>
     )
-  // }
+  }
   // redirect(`/dashboard/${workspace.id}`)
 }
 
