@@ -1,4 +1,4 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+"use client";
 //creates a supabase client for a server component: 
 //-a server component runs on the server-side
 //-it's executed on the server before any content is sent to the client
@@ -14,15 +14,11 @@ import { redirect } from 'next/navigation'
 import { getUserSubscriptionStatus } from '@/lib/supabase/queries'
 // import DashboardSetup from '@/components/dashboard-setup/dashboard-setup'
 import { Button } from '@/components/ui/button'
+import { useSupabaseUser } from '@/lib/providers/supabase-user-provider'
 
-const Dashboard = async () => {
+const Dashboard = () => {
 
-  const supabase  = createServerComponentClient({cookies})
-  console.log("supabase: ",supabase)
-  // const {
-  //   data:{user}
-  // } = await supabase.auth.getUser();
-  // console.log("user: ",user)
+  const {user} = useSupabaseUser();
 
 
   // if(!user) return;
@@ -38,6 +34,7 @@ const Dashboard = async () => {
     return (
       <div className='bg-background h-screen w-screen flex justify-center items-center border border-green-500'>
         <div>
+          <div>{user?.email && (<div>{user.email}</div>) }</div>
         {/* <DashboardSetup user={user} subscription={subscription}></DashboardSetup> */}
         </div>
       </div>
