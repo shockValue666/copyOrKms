@@ -15,6 +15,7 @@ import { getUserSubscriptionStatus } from '@/lib/supabase/queries'
 // import DashboardSetup from '@/components/dashboard-setup/dashboard-setup'
 import { Button } from '@/components/ui/button'
 import { useSupabaseUser } from '@/lib/providers/supabase-user-provider'
+import { useEffect } from 'react';
 
 const Dashboard = () => {
 
@@ -22,6 +23,10 @@ const Dashboard = () => {
   if(user){
     console.log("user: ",user)
   }
+
+  useEffect(()=>{
+    console.log("fetched")
+  },[user])
 
 
   // if(!user) return;
