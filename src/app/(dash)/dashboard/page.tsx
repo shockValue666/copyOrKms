@@ -19,6 +19,9 @@ import { useSupabaseUser } from '@/lib/providers/supabase-user-provider'
 const Dashboard = () => {
 
   const {user} = useSupabaseUser();
+  if(user){
+    console.log("user: ",user)
+  }
 
 
   // if(!user) return;
