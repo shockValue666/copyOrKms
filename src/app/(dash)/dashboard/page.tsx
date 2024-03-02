@@ -17,10 +17,12 @@ import { Button } from '@/components/ui/button'
 
 const Dashboard = async () => {
 
-  // const supabase  = createServerComponentClient({cookies})
+  const supabase  = createServerComponentClient({cookies})
+  console.log("supabase: ",supabase)
   // const {
   //   data:{user}
   // } = await supabase.auth.getUser();
+  // console.log("user: ",user)
 
 
   // if(!user) return;
