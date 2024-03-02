@@ -1,4 +1,4 @@
-"use client";
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 //creates a supabase client for a server component: 
 //-a server component runs on the server-side
 //-it's executed on the server before any content is sent to the client
@@ -9,41 +9,40 @@
 // import React, {useEffect} from 'react'
 
 import { cookies } from 'next/headers'
-// import db from '@/lib/supabase/db'
+import {db} from '@/lib/supabase/db'
 import { redirect } from 'next/navigation'
 import { getUserSubscriptionStatus } from '@/lib/supabase/queries'
 // import DashboardSetup from '@/components/dashboard-setup/dashboard-setup'
 import { Button } from '@/components/ui/button'
-import { useSupabaseUser } from '@/lib/providers/supabase-user-provider'
-import { useEffect } from 'react';
+import DashboardSetup from '@/components/dashboard/dashboard-setup'
 
-const Dashboard = () => {
+const Dashboard = async () => {
 
-  const {user} = useSupabaseUser();
-  if(user){
-    console.log("user: ",user)
-  }
-
-  useEffect(()=>{
-    console.log("fetched")
-  },[user])
+  const supabase  = createServerComponentClient({cookies})
+  const {
+    data:{user}
+  } = await supabase.auth.getUser();
 
 
-  // if(!user) return;
-  // const workspace=await db.query.workspaces.findFirst({
-  //   where:(workspace,{eq})=>eq(workspace.workspaceOwner,user.id)
+  if(!user) return;
+  // const workspace=await db.query.folders.findFirst({
+  //   where:(folder,{eq})=>eq(folder.folder,user.id)
   // })
+  const folder = await db.query.folders.findFirst({
+    where:(folder,{eq})=>eq(folder.folderOwner,user.id)
+  })
 
-  // const {data:subscription,error:subscriptionError} = await getUserSubscriptionStatus(user.id);
-  // if(subscriptionError) return;
+  console.log("user: ",user, " folder: ",folder)
+
+  const {data:subscription,error:subscriptionError} = await getUserSubscriptionStatus(user.id);
+  if(subscriptionError) return;
 
 
-   if(true){
+  if(!folder || folder){
     return (
       <div className='bg-background h-screen w-screen flex justify-center items-center border border-green-500'>
         <div>
-          <div>{user?.email && (<div>{user.email}</div>) }</div>
-        {/* <DashboardSetup user={user} subscription={subscription}></DashboardSetup> */}
+        <DashboardSetup user={user} subscription={subscription}></DashboardSetup>
         </div>
       </div>
     )

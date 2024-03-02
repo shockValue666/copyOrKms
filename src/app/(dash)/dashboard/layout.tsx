@@ -8,7 +8,7 @@ interface LayoutProps{
     params:any;
 }
 
-const Layout:React.FC<LayoutProps> = ({children,params}) => {
+const Layout:React.FC<LayoutProps> = async ({children,params}) => {
 //   const {data:products,error} = await getActiveProductsWithPrice();
 //   if(error) throw new Error('Error fetching products');
   return (
