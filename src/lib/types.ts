@@ -10,3 +10,9 @@ export const FormSchema = z.object(
         password:z.string().describe("Password").min(1,'Password is required')
     }
 )
+
+
+export const CreateFolderFromSchema = z.object({
+    folderName:z.string().describe("Name of the folder").min(1,"Folder name is required"),
+    folder:z.any()
+})

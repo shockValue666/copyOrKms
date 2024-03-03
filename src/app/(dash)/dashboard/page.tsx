@@ -24,13 +24,13 @@ const Dashboard = async () => {
     where:(folder,{eq})=>eq(folder.folderOwner,user.id)
   })
 
-  console.log("user: ",user, " folder: ",folder)
+  // console.log("user: ",user, " folder: ",folder)
 
   const {data:subscription,error:subscriptionError} = await getUserSubscriptionStatus(user.id);
   if(subscriptionError) return;
 
 
-  if(!folder || folder){
+  if(!folder){
     return (
       <div className='bg-background h-screen w-screen flex justify-center items-center border border-green-500'>
         <div>
@@ -39,7 +39,7 @@ const Dashboard = async () => {
       </div>
     )
   }
-  // redirect(`/dashboard/${workspace.id}`)
+  redirect(`/dashboard/${folder.id}`)
 }
 
 export default Dashboard

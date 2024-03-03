@@ -1,4 +1,5 @@
 import { PgTable,integer,pgTable,uuid,text,timestamp,varchar } from "drizzle-orm/pg-core";
+import { users } from "../../../migrations/schema";
 
 
 
@@ -20,7 +21,7 @@ export const folders = pgTable("folders",{
     data:text('data'),
     inTrash:text("in_trash"),
     bannerUrl:text("banner_url"),
-    folderOwner:uuid('folder_owner').notNull().references(()=>profiles.id,{onDelete:"cascade"}),
+    folderOwner:uuid('folder_owner').notNull().references(()=>users.id,{onDelete:"cascade"}),
 });
 
 
