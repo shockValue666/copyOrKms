@@ -205,6 +205,7 @@ const DashboardSetup:React.FC<DashboardSetupProps> = ({user,subscription}) => {
                     <Button
                         type="submit"
                         disabled={isLoading}
+                        className='bg-white text-black'
                     >
                         {!isLoading ? 'Create Folder' : <Loader />}
                     </Button>

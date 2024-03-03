@@ -188,7 +188,7 @@ const Signup = () => {
                             </FormItem>
                         )}
                     />
-                    <Button type='submit' className='w-full p-6' disabled={isLoading}>
+                    <Button type='submit' className='w-full p-6 bg-white text-black' disabled={isLoading}>
                         {!isLoading ? "Create Account" : <Loader/>}
                     </Button>
                 </>

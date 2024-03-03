@@ -124,7 +124,7 @@ const LoginPage = () => {
                 {submitError && <FormMessage>{submitError}</FormMessage>}
                 <Button
                 type="submit"
-                className="w-full p-6"
+                className="w-full p-6 bg-white text-black"
                 size="lg"
                 disabled={isLoading}
                 >
