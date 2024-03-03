@@ -37,7 +37,7 @@ const Page = () => {
       id:v4(),
       data:"cock",
       createdAt: new Date().toISOString(),
-      title:"don't suck this cock",
+      title:"another one",
       iconId:"⚡️",
       inTrash:null,
       bannerUrl:null,

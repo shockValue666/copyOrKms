@@ -38,3 +38,20 @@ export const files = pgTable("files",{
     bannerUrl:text("banner_url"),
     folderId:uuid('folder_id').notNull().references(()=>folders.id,{onDelete:"cascade"}),
 })
+
+
+export const collaborators = pgTable('collaborators', {
+    id: uuid('id').defaultRandom().primaryKey().notNull(),
+    folderId: uuid('folder_id')
+        .notNull()
+        .references(() => folders.id, { onDelete: 'cascade' }),
+    createdAt: timestamp('created_at', {
+        withTimezone: true,
+        mode: 'string',
+    })
+        .defaultNow()
+        .notNull(),
+    userId: uuid('user_id')
+        .notNull()
+        .references(() => users.id, { onDelete: 'cascade' }),
+});

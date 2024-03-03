@@ -27,7 +27,7 @@ export const folders = pgTable("folders", {
 	data: text("data"),
 	inTrash: text("in_trash"),
 	bannerUrl: text("banner_url"),
-	folderOwner: uuid("folder_owner").notNull().references(() => profiles.id, { onDelete: "cascade" } ),
+	folderOwner: uuid("folder_owner").notNull().references(() => users.id, { onDelete: "cascade" } ),
 });
 
 export const files = pgTable("files", {
@@ -104,4 +104,11 @@ export const subscriptions = pgTable("subscriptions", {
 	canceledAt: timestamp("canceled_at", { withTimezone: true, mode: 'string' }).default(sql`now`),
 	trialStart: timestamp("trial_start", { withTimezone: true, mode: 'string' }).default(sql`now`),
 	trialEnd: timestamp("trial_end", { withTimezone: true, mode: 'string' }).default(sql`now`),
+});
+
+export const collaborators = pgTable("collaborators", {
+	id: uuid("id").defaultRandom().primaryKey().notNull(),
+	folderId: uuid("folder_id").notNull().references(() => folders.id, { onDelete: "cascade" } ),
+	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+	userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" } ),
 });
