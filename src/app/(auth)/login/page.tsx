@@ -50,7 +50,7 @@ const LoginPage = () => {
             return;
         }
         //immediately after loging in redirecting to my cock
-        router.push("/dashboard")
+        router.replace("/dashboard")
     }
   return (
     //form from shadcn: lol it uses react-hook-form and zod, -it provides reusable components,

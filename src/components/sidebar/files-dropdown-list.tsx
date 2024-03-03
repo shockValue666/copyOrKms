@@ -38,16 +38,21 @@ const FilesDropdownList:React.FC<FilesDropdownListProps> = ({foldersFiles,folder
     //state
     useEffect(()=>{
         setFiles(state.folders.find((folder)=>folder.id===folderId)?.files || [])
+        console.log("state.folders: ",files)
     },[state,folderId])
+
+    // useEffect(()=>{
+    //     console.log("createdFiles: ",files)
+    // },[files])
 
     //add folder 
     const addFileHandler = async () => {
         //subscription modal
-        if(files.length>=3 && !subscription){
-            console.log("greater than my cock")
-            // setOpen(true);
-            return;
-        }   
+        // if(files.length>=3 && !subscription){
+        //     console.log("greater than my cock")
+        //     // setOpen(true);
+        //     return;
+        // }   
         const newFile:File = {
             data:null,
             id:v4(),

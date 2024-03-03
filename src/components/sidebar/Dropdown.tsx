@@ -211,30 +211,6 @@ const Dropdown:React.FC<DropdownProps> = ({title,id,listType,iconId,children,dis
     );
 
   return (
-    // <AccordionItem value={id} className={listStyles} onClick={(e)=>{
-    //     //stop propagation
-    //     e.stopPropagation();
-    //     navigatePage(id,listType);
-    // }}>
-    //     <AccordionTrigger id={listType} className='hover:no-underline p-2 dark:text-muted-foreground text-sm' disabled={true}>
-    //         <div className={`${groupIdentifies} `}>
-    //             <div className='flex gap-4 items-center justify-center overflow-hidden'>
-    //                 <div className='relative'>
-    //                         {iconId}
-    //                 </div>
-    //                 <input type="text" value={fileTitle} className={clsx(` outline-none overflow-hidden w-[140px] text-Neutrals/neutrals-7`,{
-    //                     "bg-muted cursor-text":isEditing,
-    //                     "bg-transparent cursor-pointer":!isEditing,
-    //                 })} readOnly={!isEditing} onDoubleClick={handleDoubleClick} onBlur={handleBlur} onChange={fileTitleChange}/>
-    //             </div>
-    //             <div className={hoverStyles}>
-    //                 <TrashIcon onClick={moveToTrash} size={15} className='hover:dark:text-white dark:text-Neutrals/neutrals-7 transition-colors' />
-    //             </div>
-    //         </div>
-    //     </AccordionTrigger>
-    //     <AccordionContent>
-    //     </AccordionContent>
-    // </AccordionItem>
     <div className={`${listStyles}`} onClick={()=>navigatePage('','file')}>
         <div className={`${groupIdentifies} `}>
                 <div className='flex gap-4 items-center justify-center overflow-hidden'>

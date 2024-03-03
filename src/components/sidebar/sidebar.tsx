@@ -52,7 +52,7 @@ const Sidebar:React.FC<SidebarPros> = async ({params,className}) => {
             <FolderDropdown defaultValue={[...privateWorkspaces,...collaboratingWorkspaces,...sharedWorkspaces].find(workspace=>workspace.id==params.folderId)} sharedFolders={sharedWorkspaces} collaboratingFolders={collaboratingWorkspaces} privateFolders={privateWorkspaces}></FolderDropdown>
             {/* <PlanUsage foldersLength={fileData?.length || 0} subscription={subscriptionData} />   */}
             <NativeNavigation myFolderId={params.folderId}></NativeNavigation>
-            <ScrollArea className='overflow-scroll relative h-[450px] border border-green-400 '>
+            <ScrollArea className='overflow-scroll relative h-[450px] '>
                 <div className='pointer-events-none w-full absolute bottom-0 h-20 bg-gradient-to-t from-background to-transparent z-40'>
                 </div>
                 <FilesDropdownList foldersFiles={fileData} folderId={params.folderId}/>

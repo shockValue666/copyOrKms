@@ -58,6 +58,7 @@ const DashboardSetup:React.FC<DashboardSetupProps> = ({user,subscription}) => {
         let folderImagePath=null;
         const folderUUID = v4();
         const profile = await getUserFromId(user.id)
+        console.log('folderimage: ',folderImage, " folderUUID: ",folderUUID, "profile: ",profile)
         if(!profile){
             toast({
                 variant:"destructive",
@@ -100,36 +101,33 @@ const DashboardSetup:React.FC<DashboardSetupProps> = ({user,subscription}) => {
 
         try {
             const newFolder: Folder = {
-            data:null,
-            createdAt:new Date().toISOString(),
-            iconId: selectedEmoji,
-            id: folderUUID,
-            inTrash:"",
-            title: value.folderName,
-            folderOwner:profile[0].id,
-            bannerUrl:folderImagePath
+                data:null,
+                createdAt:new Date().toISOString(),
+                iconId: selectedEmoji,
+                id: folderUUID,
+                inTrash:"",
+                title: value.folderName,
+                folderOwner:profile[0].id,
+                bannerUrl:folderImagePath
             }
-            // console.log("new workspace: asdsfasdfadsfasd",newWorkspace)
+            console.log("new folder: asdsfasdfadsfasd",newFolder)
             const {data,error:createError} = await createFolder(newFolder);
     //        bring crateWorkspace here and piece by piece fix it
             if(data) {
-            console.log("data from crating new folder: ",data)
+                console.log("data from crating new folder: ",data)
             } else if(createError) {
-            console.log("create folder error: ",createError)
-            }
-            if(createError){
-            throw new Error();
+                console.log("create folder error: ",createError)
             }
             dispatch({
-            type:"ADD_FOLDER",
-            payload:{... newFolder,files: [] }
+                type:"ADD_FOLDER",
+                payload:{... newFolder,files: [] }
             })
             toast({
-            title: 'Folder Created',
-            description: `${newFolder.title} has been created successfully.`,
-            action:(
-                <ToastAction altText="folder created suxesfully">SUXES</ToastAction>
-            )
+                title: 'Folder Created',
+                description: `${newFolder.title} has been created successfully.`,
+                action:(
+                    <ToastAction altText="folder created suxesfully">SUXES</ToastAction>
+                )
             })
             
             router.replace(`/dashboard/${newFolder.id}`);

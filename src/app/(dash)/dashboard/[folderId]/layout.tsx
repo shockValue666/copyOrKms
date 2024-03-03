@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // import MobileSidebar from '@/components/sidebar/mobile-sidebar';
 // import Sidebar from '@/components/sidebar/sidebar';
 import Sidebar from '@/components/sidebar/sidebar';
@@ -11,6 +12,7 @@ interface LayoutProps{
 }
 
 const Layout:React.FC<LayoutProps> = ({children,params}) => {
+    console.log("rendered: ",params)
 
   return (
     <main className='flex overflow-hidden h-screen w-screen'>

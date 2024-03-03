@@ -121,7 +121,7 @@ const appReducer = (
                     folders: state.folders.map((folder) => {
                       return {
                         ...folder,
-                        folders: [...folder.files, action.payload.file].sort(
+                        files: [...folder.files, action.payload.file].sort(
                           (a, b) =>{
                             // new Date(a.createdAt).getTime() -
                             // new Date(b.createdAt).getTime()
@@ -385,7 +385,7 @@ const AppStateProvider: React.FC<AppStateProviderProps> = ({ children }) => {
     //in order to make it more optimized
   
     useEffect(() => {
-      console.log('App State Changed', state);
+      // console.log('App State Changed', state);
     }, [state]);
   
     return (
