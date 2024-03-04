@@ -34,7 +34,7 @@ const Dashboard = async () => {
   // if(subscriptionError) return;
 
 
-  if(!folder){
+  if(!folder || folder.length === 0){
     return (
       <div className='bg-background h-screen w-screen flex justify-center items-center'>
         <div>
@@ -42,29 +42,33 @@ const Dashboard = async () => {
         </div>
       </div>
     )
-  }else{
-    return (
-      <div className='bg-background h-screen w-screen flex justify-center items-center border border-green-500'>
-        <ScrollArea className="h-72 w-48 rounded-md border">
-          <div className="p-4">
-            <h4 className="mb-4 text-sm font-medium leading-none">Folders</h4>
-            {folder.map((f) => (
-              <>
-                <div key={f.id} className="text-sm">
-                  {/* <Image/> */}
-                  <Link key={f.id} href={`dashboard/${f.id}`}>{f.title}</Link>
-                </div>
-                {/* <Separator className="my-2" /> */}
-              </>
-            ))}
-          </div>
-        </ScrollArea>
-      </div>
-    )
-  }
-  // redirect(`/dashboard/${folder.id}`)
+   }
+  redirect(`/dashboard/${folder[0].id}`)
 }
 
 export default Dashboard
 
 
+
+
+
+//else{
+  //   return (
+  //     <div className='bg-background h-screen w-screen flex justify-center items-center border border-green-500'>
+  //       <ScrollArea className="h-72 w-48 rounded-md border">
+  //         <div className="p-4">
+  //           <h4 className="mb-4 text-sm font-medium leading-none">Folders</h4>
+  //           {folder.map((f) => (
+  //             <>
+  //               <div key={f.id} className="text-sm">
+  //                 {/* <Image/> */}
+  //                 <Link key={f.id} href={`dashboard/${f.id}`}>{f.title}</Link>
+  //               </div>
+  //               {/* <Separator className="my-2" /> */}
+  //             </>
+  //           ))}
+  //         </div>
+  //       </ScrollArea>
+  //     </div>
+  //   )
+  // }
