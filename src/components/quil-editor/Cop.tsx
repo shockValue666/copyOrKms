@@ -75,6 +75,10 @@ const Cop = () => {
         }else{
             const {data:creteFileData,error:createFileError} = await createFile(newFile)
             dispatch({type:"ADD_FILE",payload:{file:newFile,folderId}})
+            toast({
+                title:"File created",
+                description:`${newFile.title} has been created successfully`
+            })
             router.replace(`/dashboard/${folderId}/${newFile.id}`)
         }
     }
