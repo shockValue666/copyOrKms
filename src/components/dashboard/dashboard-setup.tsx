@@ -100,6 +100,7 @@ const DashboardSetup:React.FC<DashboardSetupProps> = ({user,subscription}) => {
         }
 
         try {
+            if(!profile || profile===undefined ) return;
             const newFolder: Folder = {
                 data:null,
                 createdAt:new Date().toISOString(),
@@ -107,7 +108,7 @@ const DashboardSetup:React.FC<DashboardSetupProps> = ({user,subscription}) => {
                 id: folderUUID,
                 inTrash:"",
                 title: value.folderName,
-                folderOwner:profile[0].id,
+                folderOwner:profile.id,
                 bannerUrl:folderImagePath
             }
             console.log("new folder: asdsfasdfadsfasd",newFolder)
