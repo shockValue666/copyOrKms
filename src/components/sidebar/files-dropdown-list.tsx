@@ -38,7 +38,7 @@ const FilesDropdownList:React.FC<FilesDropdownListProps> = ({foldersFiles,folder
     //state
     useEffect(()=>{
         setFiles(state.folders.find((folder)=>folder.id===folderId)?.files || [])
-        console.log("state.folders: ",files)
+        console.log("state.files: ",files)
     },[state,folderId])
 
     // useEffect(()=>{
