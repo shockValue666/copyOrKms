@@ -524,14 +524,14 @@ const QuillEditor:React.FC<QuillEditorProps> = ({
           </div>
         </div>
       </div>
-      {details.bannerUrl && <>
+      {/* {details.bannerUrl && <>
         <div className='relative w-full h-[200px]'>
           <Image src={
               supabase.storage.from('file-banners').getPublicUrl(details.bannerUrl).data.publicUrl
               // "/BannerImage.png"
           } fill className='w-full md:h-40 h-20 object-cover' alt="Banner Image"/>
         </div>
-      </>}
+      </>} */}
       <div className='flex justify-center items-center flex-col mt-2 relative'>
         {/* <div className='w-full self-center max-w-[800px] flex flex-col px-7 lg:my-8'>
           <div className='text-[45px]'>
