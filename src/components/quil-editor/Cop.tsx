@@ -75,8 +75,8 @@ const Cop = () => {
         }else{
             const {data:creteFileData,error:createFileError} = await createFile(newFile)
             dispatch({type:"ADD_FILE",payload:{file:newFile,folderId}})
+            router.replace(`/dashboard/${folderId}/${newFile.id}`)
         }
-        // router.replace(`/dashboard/${folderId}/${newFile.id}`)
     }
     const [text,setText] = useState<string>("")
   return (
