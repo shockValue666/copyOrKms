@@ -60,7 +60,7 @@ export const Dash:React.FC<DashProps> = ({folders}) => {
             <div className="grid gap-4 w-full">
               {
                 folders.map(folder=>(
-                  <Link href={`dashboard/${folder.id}`} key={folder.id}>
+                  <a href={`dashboard/${folder.id}`} key={folder.id}>
                     <Card>
                       <CardContent className="flex items-center gap-4">
                       <FolderOpenIcon className="h-6 w-6" />
@@ -74,7 +74,7 @@ export const Dash:React.FC<DashProps> = ({folders}) => {
                       </Button>
                       </CardContent>
                   </Card>
-                  </Link>
+                  </a>
                 ))
               }
             </div>
