@@ -1,28 +1,39 @@
 "use client";
 import React from 'react'
-import Banner from '../../../public/images/appBanner.png'
+import Banner from '../../../public/images/banner.png'
 import Cal from '../../../public/images/cal.png'
-import Diamond from '../../../public/images/icons/diamond.svg'
-import CheckIcon from '../../../public/images/icons/check.svg'
+import Diamond from '../../../public/icons/diamond.svg'
+import CheckIcon from '../../../public/icons/check.svg'
 import MainShit from '@/components/landing-page/MainShit'
 import TitleSection from '@/components/globals/title-section'
 import {Button as MovingButton} from '@/components/ui/moving-border'
 import Image from 'next/image'
 import Sample from '@/components/landing-page/Sample';
-import { CLIENTS } from '@/lib/constants';
+import { CLIENTS, PRICING_CARDS, PRICING_PLANS, USERS } from '@/lib/constants';
 import SelfGeneratingShit from '@/components/landing-page/SelfGeneratingShit';
+import { randomUUID } from 'crypto';
+import { twMerge } from 'tailwind-merge';
+import clsx from 'clsx';
+import CustomCard from '@/components/landing-page/custom-card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { CardContent, CardDescription, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import Footer from '@/components/footer/footer';
+import { useRouter } from 'next/navigation';
 
 
 const page = () => {
+  const router = useRouter()
 
   const handleClick = () => {
     // Handle the click event here
     console.log('Button clicked!');
+    router.replace(`/dashboard`)
   };
   
   return (
     <div className='flex flex-col justify-center items-center w-full overflow-x-hidden'>
-      <div className='my-[2%] '>
+      <div className='my-[4%] '>
         <TitleSection subheading='' title='' pill='Supercharge your note-taking with AI-powered autocomplete ✨ ' />
       </div>
       <MainShit/>
@@ -34,7 +45,7 @@ const page = () => {
           </div>
         </button>
       </div>
-      <div>
+      <div className='my-16'>
             <Image src={Banner} alt={'Application Banner'}/>
             <div className='sm:w-full w-full flex justify-center items-center sm:ml-0 ml-[-50px]'>
             <div className='bottom-0 bg-gradient-to-t left-0 right-0  z-10 absolute'>
@@ -113,6 +124,135 @@ const page = () => {
         <TitleSection subheading='' title='Unlock your productivity' pill='Testimonialss' />
         {/* <SelfGeneratingShit/> */}
       </div>
+      <section className='relative'>
+          <div
+              className="w-full
+              blur-[120px]
+              rounded-full
+              h-32
+              absolute
+              bg-brand-primaryPurple/50
+              -z-10
+              top-56
+            "
+            />
+            <div className='mt-20 px-4 sm:px-6 flex flex-col overflow-x-hidden overflow-visible'>
+              <TitleSection
+                title="Trusted by all"
+                subheading="Join thousands of satisfied users who rely on our platform for their 
+                personal and professional productivity needs."
+                pill="Testimonials"
+              />
+              {
+                [...Array(2)].map((arr,index)=> (
+                  <div key={Math.random()} className={twMerge(clsx('mt-10 flex flex-nowrap gap-6 self-start', {
+                    'flex-row-reverse':index===1,
+                    'animate-[slide_250s_linear_infinite]':true,
+                    'animate-[slide_250s_linear_infinite_reverse]': index===1,
+                    'ml-[100vw]':index===1
+                  }),
+                    'hover:paused'
+                  )}>
+                    {
+                      USERS.map((testimonial,index)=>(
+                        <CustomCard key={testimonial.name} className='w-[500px] shrink-0 rounded-xl dark:bg-gradient-to-t dark:from-broder dark:to-background'
+                        cardHeader={<div className='flex items-center gap-4'><Avatar>
+                            <AvatarImage src={`/avatars/${index+1}.png`}/>
+                            <AvatarFallback>AV</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <CardTitle className="text-foreground">{testimonial.name}</CardTitle>
+                            <CardDescription className='dark:text-washed-purple-800'>{testimonial.name.toLowerCase()}</CardDescription>
+                          </div>
+                          </div>
+                        }
+                        cardContent={
+                          <p className='dark:text-washed-purple-800'>
+                            {testimonial.message}
+                          </p> 
+
+                        }
+                      >
+
+                        </CustomCard>
+                      ))
+                    }
+
+
+                  </div>
+                ))
+              }
+            </div>
+
+          </section>
+          <section className=' px-4 sm:px-6'>
+          <TitleSection
+            title="The Perfect Plan For You"
+            subheading="Experience all the benefits of our platform. Select a plan that suits your needs and take your productivity to new heights."
+            pill="Pricing"
+          />
+          <div className='
+          flex
+          flex-col-reverse
+          sm:flex-row
+          gap-4
+          justify-center
+          sm:items-stretch
+          items-center
+          mt-10'>
+            <h1 className='hidden'>chi m</h1>
+            {PRICING_CARDS.map((card)=>(
+              <CustomCard key={card.planType} 
+                className={clsx("w-[300px] rounded-2xl dark:bg-black/40 background-blur-3xl relative",
+                  {
+                    "border-brand-primaryPurple/70":card.planType===PRICING_PLANS.proplan
+                  }
+                  )}
+                cardHeader={<CardTitle className='text-2xl font-semibold '>
+                    {
+                      card.planType === PRICING_PLANS.proplan && <>
+                        <div className='hidden dark:block w-full blur-[120px] rounded-full h-32 absolute bg-brand-primaryPurple/80 -z-10 top-0'/>
+                        <Image src={Diamond} alt="Pro Plan Icon" className='absolute top-6 right-6'/>
+                      </>
+                    }
+                    {card.planType}
+                    </CardTitle>
+                  }
+                  cardContent={
+                    <CardContent className='p-0'>
+                      <span className='font-normal text-2xl '>
+                        ${card.price}
+                      </span>
+                      {+card.price > 0 ? <span className='dark:text-washed-purple-800 ml-1'>/mo</span> : ""}
+                      <p className='dark:text-washed-purple-800'></p>
+                      <Button variant={'secondary'} className='whitespace-nowrap w-full mt-4'>
+                        {card.planType === PRICING_PLANS.proplan ? "Go Pro" : "Get Started"}
+                      </Button>
+                    </CardContent>
+                  }
+                  cardFooter={
+                    <ul className='font-normal flex mb-2 flex-col gap-4'>
+                      <small>{card.highlightFeature}</small>
+                      {card.freatures.map((feature)=>(
+                        <li 
+                          key={feature}
+                          className='flex items-center gap-2 '
+                        >
+                          <Image src={CheckIcon} alt='Check Icon'/>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  }
+              >
+
+              </CustomCard>
+            ))}
+          </div>
+        </section>
+        <div className='w-full'>
+        <Footer/>
+        </div>
     </div>
   )
 }
