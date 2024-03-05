@@ -37,6 +37,7 @@ export async function POST(req: Request): Promise<Response> {
     //     ],
     //   });
     const copilotKit = new CopilotBackend();
+    console.log("req: ",req)
 
       return copilotKit.response(req, new OpenAIAdapter({model:"gpt-3.5-turbo"}));
 }

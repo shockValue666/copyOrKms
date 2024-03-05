@@ -16,3 +16,16 @@ export const CreateFolderFromSchema = z.object({
     folderName:z.string().describe("Name of the folder").min(1,"Folder name is required"),
     folder:z.any()
 })
+
+
+export const UploadBannerFormSchema = z.object({
+    banner:z.any().describe("Banner Image")
+})
+
+// export type NextApiResponseServerIo = NextApiResponse & {
+//     socket: Socket & {
+//         server: NetServer & {
+//             io:SocketIoServer
+//         }
+//     }
+// }

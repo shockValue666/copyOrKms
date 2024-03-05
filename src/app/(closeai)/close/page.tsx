@@ -67,8 +67,6 @@ const Page = () => {
         <Button type="submit" className="text-primary border">Submit</Button>
       </form>
     </Form>
-
-
       <CopilotTextarea
         className="px-4 py-4 w-[50%] text-black"
         value={text}

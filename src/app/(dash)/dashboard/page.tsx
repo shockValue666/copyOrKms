@@ -10,6 +10,8 @@ import { redirect } from 'next/navigation'
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@radix-ui/react-select';
 import Link from 'next/link';
+import Dash from '@/components/dashboard/dash';
+import { Folder } from '@/lib/supabase/supabase.types';
 
 const Dashboard = async () => {
   cookies().getAll();
@@ -40,6 +42,12 @@ const Dashboard = async () => {
         <div>
         <DashboardSetup user={user} subscription={subscription}></DashboardSetup>
         </div>
+      </div>
+    )
+   }else{
+    return (
+      <div className='w-full h-full'>
+          <Dash folders={folder}/>
       </div>
     )
    }

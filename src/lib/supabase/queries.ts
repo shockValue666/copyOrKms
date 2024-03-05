@@ -22,7 +22,8 @@ export const getUserFromName = async (name:string) => {
     return response;
 }
 export const getUserFromId = async (id:string) => {
-    const response = await db.select().from(users).where(eq(users.id,id))
+    // const response = await db.select().from(users).where(eq(users.id,id))
+    const response = await db.query.users.findFirst({where:(user,{eq})=> eq(user.id,id)}) 
     return response;
 }
 
@@ -77,6 +78,7 @@ export const createFolder = async(folder:Folder) => {
 
 export const createFile = async (file:File) => {
     try{
+        console.log("file: ",file)
         const response = await db.insert(files).values(file);
         return {data:response,error:null}
     }catch(err){
@@ -278,5 +280,35 @@ export const updateFile = async (file:Partial<File>,fileId:string) => {
         return {data:null,error:null}
     } catch (error) {
         return {data:null,error:`error at updating the file: ${error}`}
+    }
+}
+
+
+export const deleteFile = async (fileId:string) => {
+    await db.delete(files).where(eq(files.id,fileId));
+}
+
+export const getFileDetails = async(fileId:string) => {
+    const isValid = validate(fileId);
+    if(!isValid) return {data:[],error:"Error, invalid file id from uuid"}
+    try {
+        const result = await (db.select().from(files).where(eq(files.id,fileId)).limit(1)) as File[] | [];
+        return {data:result,error:null}
+    } catch (error) {
+        return {data:[],error:`Error at getting the file details: ${error}`}
+    }
+}
+
+
+export const getFolderDetails = async(folderId:string) => {
+    const isValid = validate(folderId);
+    if(!isValid) return {data:[],error:"Error, invalid file id from uuid"}
+    try {
+        const result = await (db.select().from(folders).where(eq(folders.id,folderId)).limit(1)) as Folder[] | [];
+        console.log("result from getFolderDetails: ",result)
+        return {data:result,error:null}
+    } catch (error) {
+        console.log("error at getFolderDetails: ",error)
+        return {data:[],error:`Error at getting the folder details: ${error}`}
     }
 }

@@ -48,7 +48,7 @@ const Sidebar:React.FC<SidebarPros> = async ({params,className}) => {
         className
     )}>
         <div>
-            idk
+            {/* idk what to say bitch */}
             <FolderDropdown defaultValue={[...privateWorkspaces,...collaboratingWorkspaces,...sharedWorkspaces].find(workspace=>workspace.id==params.folderId)} sharedFolders={sharedWorkspaces} collaboratingFolders={collaboratingWorkspaces} privateFolders={privateWorkspaces}></FolderDropdown>
             {/* <PlanUsage foldersLength={fileData?.length || 0} subscription={subscriptionData} />   */}
             <NativeNavigation myFolderId={params.folderId}></NativeNavigation>

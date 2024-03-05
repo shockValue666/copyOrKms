@@ -34,5 +34,11 @@ export async function middleware(req:NextRequest){
             return NextResponse.redirect(new URL('/dashboard',req.url))
         }
     }
+    if(['/newlogin','/newsignup'].includes(req.nextUrl.pathname)){
+        if(session){
+            return NextResponse.redirect(new URL('/newdashboard',req.url))
+        }
+    }
+
     return res;
 }
