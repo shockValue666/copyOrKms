@@ -6,6 +6,8 @@ import { ThemeProvider } from "@/lib/providers/next-theme-provider";
 import { SupabaseUserProvider } from "@/lib/providers/supabase-user-provider";
 import AppStateProvider from "@/lib/providers/state-provider";
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +30,7 @@ export default function RootLayout({
               <SupabaseUserProvider>
                 {children}
                 <Analytics />
+                <SpeedInsights />
               </SupabaseUserProvider>
             </AppStateProvider>
           </ThemeProvider>
