@@ -312,3 +312,25 @@ export const getFolderDetails = async(folderId:string) => {
         return {data:[],error:`Error at getting the folder details: ${error}`}
     }
 }
+
+export const fileExists = async (fileTitle:string,folderId:string) => {
+    try {
+        const result = await db.query.files.findFirst({
+            where:(f,{eq})=> and(eq(f.title,fileTitle),eq(f.folderId,folderId),eq(f.inTrash,""))
+        })
+        console.log("result from fileExists: ",result);   
+        return {
+            data:result,
+            error:null
+        
+        }
+    } catch (error) {
+        return {
+            data:null,
+            error:`error at fileExists: ${error}`
+        }   
+    }
+    // const userExists = await db.query.collaborators.findFirst({
+    //     where:(u,{eq})=> and(eq(u.userId,user.id),eq(u.folderId,folderId))
+    // });
+}

@@ -57,7 +57,7 @@ const Dropdown:React.FC<DropdownProps> = ({title,id,listType,iconId,children,dis
             folderId:id,
             data:null,
             createdAt:new Date().toISOString(),
-            inTrash:null,
+            inTrash:"",
             title:'Untitled',
             iconId:'📄',
             id:v4(),

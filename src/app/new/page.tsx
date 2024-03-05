@@ -39,7 +39,7 @@ const Page = () => {
       createdAt: new Date().toISOString(),
       title:"another one",
       iconId:"⚡️",
-      inTrash:null,
+      inTrash:"",
       bannerUrl:null,
       folderId:folder?.id
     }

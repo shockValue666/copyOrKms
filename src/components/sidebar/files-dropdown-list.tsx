@@ -58,7 +58,7 @@ const FilesDropdownList:React.FC<FilesDropdownListProps> = ({foldersFiles,folder
             id:v4(),
             createdAt:new Date().toISOString(),
             iconId:'📄',
-            inTrash:null,
+            inTrash:"",
             title:"Untitled",
             folderId,
             bannerUrl:""

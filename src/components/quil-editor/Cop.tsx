@@ -9,10 +9,14 @@ import { z } from 'zod';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { createFile, updateFolder } from '@/lib/supabase/queries';
+import { createFile, fileExists, updateFolder } from '@/lib/supabase/queries';
 import { useAppState } from '@/lib/providers/state-provider';
 import { v4 } from 'uuid';
 import { File } from '@/lib/supabase/supabase.types';
+import { useToast } from '../ui/use-toast';
+import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { useSupabaseUser } from '@/lib/providers/supabase-user-provider';
 
 
 const Cop = () => {
@@ -20,6 +24,8 @@ const Cop = () => {
     const [hasSubject,setHasSubject] = useState<boolean>(false)
     const aiprovider = useContext(AiContext)
     const {folderId,dispatch}  = useAppState();
+    const {toast} = useToast()
+    const router = useRouter();
     useEffect(()=>{
         console.log('aiprovider: ', aiprovider)
     },[aiprovider])
@@ -37,6 +43,10 @@ const Cop = () => {
       console.log('subject: ', subject)
       setSubject(subject);
       setHasSubject(true);
+      toast({
+        title:"Subject set",
+        description:"You can now start writing your text",
+      })
     }
 
     //save folder data
@@ -54,13 +64,19 @@ const Cop = () => {
             createdAt: new Date().toISOString(),
             title: subject,
             iconId: "⚡️",
-            inTrash: null,
+            inTrash: "",
             bannerUrl: null,
             folderId: folderId
         }
-        const {data:creteFileData,error:createFileError} = await createFile(newFile)
-        console.log('creteFileData: ', creteFileData, "createFileError: ", createFileError)
-        dispatch({type:"ADD_FILE",payload:{file:newFile,folderId}})
+        const fileAlreadyExists = await fileExists(newFile.title,folderId)
+        console.log('file already exists: ', fileAlreadyExists.data)
+        if(fileAlreadyExists.data){
+            router.replace(`/dashboard/${folderId}/${fileAlreadyExists.data.id}`)
+        }else{
+            const {data:creteFileData,error:createFileError} = await createFile(newFile)
+            dispatch({type:"ADD_FILE",payload:{file:newFile,folderId}})
+        }
+        // router.replace(`/dashboard/${folderId}/${newFile.id}`)
     }
     const [text,setText] = useState<string>("")
   return (
