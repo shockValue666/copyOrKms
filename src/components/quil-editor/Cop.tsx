@@ -79,7 +79,7 @@ const Cop = () => {
                 title:"File created",
                 description:`${newFile.title} has been created successfully`
             })
-            router.push(`/dashboard/${folderId}/${newFile.id}`,{})
+            // router.push(`/dashboard/${folderId}/${newFile.id}`,{})
         }
     }
     const [text,setText] = useState<string>("")
