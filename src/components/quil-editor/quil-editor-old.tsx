@@ -246,7 +246,6 @@ const QuillEditor:React.FC<QuillEditorProps> = ({
       console.log("fetching info")
       if (dirType === 'file') {
         const { data: selectedDir, error } = await getFileDetails(fileId);
-        console.log("selectedDir: ",JSON.parse(selectedDir[0].data || "").ops[0], " error: ",error)
         // console.log("selectedDir: ",selectedDir[0].data, " error: ",error)
         if (error || !selectedDir) {
           console.log("error while trying to fetch file details, ",error)
@@ -265,8 +264,9 @@ const QuillEditor:React.FC<QuillEditorProps> = ({
           return
         };
         // quill.setContents(selectedDir[0]);
+        console.log("selectedDir: ",JSON.parse(selectedDir[0].data || "").text, " error: ",error)
         quill.setContents([
-          JSON.parse(selectedDir[0].data || "").ops[0],
+          {insert:JSON.parse(selectedDir[0].data || "").text,}
         ]);
         dispatch({
           type: 'UPDATE_FILE',

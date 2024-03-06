@@ -71,7 +71,7 @@ const Cop = () => {
         const fileAlreadyExists = await fileExists(newFile.title,folderId)
         console.log('file already exists: ', fileAlreadyExists.data)
         if(fileAlreadyExists.data){
-            router.replace(`/dashboard/${folderId}/${fileAlreadyExists.data.id}`)
+            router.push(`/dashboard/${folderId}/${fileAlreadyExists.data.id}`)
         }else{
             const {data:creteFileData,error:createFileError} = await createFile(newFile)
             dispatch({type:"ADD_FILE",payload:{file:newFile,folderId}})
@@ -79,7 +79,7 @@ const Cop = () => {
                 title:"File created",
                 description:`${newFile.title} has been created successfully`
             })
-            router.replace(`/dashboard/${folderId}/${newFile.id}`,{})
+            router.push(`/dashboard/${folderId}/${newFile.id}`,{})
         }
     }
     const [text,setText] = useState<string>("")
