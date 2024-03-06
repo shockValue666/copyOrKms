@@ -168,11 +168,11 @@ const DashboardSetup:React.FC<DashboardSetupProps> = ({user,subscription}) => {
                         {selectedEmoji}
                         </EmojiPicker>
                     </div>
-                    <Button
+                    {/* <Button
                         onClick={()=>{actionLogCock();dosth()}}
                     >
                         cock
-                    </Button>
+                    </Button> */}
                     <div className='w-full'>
                         <Label htmlFor='folderName' className='text-sm text-muted-foreground'>
                         Folder Name

@@ -8,7 +8,7 @@ import { FormSchema } from '@/lib/types';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import Link from 'next/link';
 import Image from 'next/image';
-import Logo from '../../../../public/images/cypresslogo.svg'
+import Logo from '../../../../public/images/newLogo.png'
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Loader from '@/components/globals/Loader';
@@ -68,9 +68,9 @@ const LoginPage = () => {
         //runs only if validation is successful
         }} onSubmit={form.handleSubmit(onSubmit)} className='w-full sm:justify-center sm:w-[400px] space-y-6 flex flex-col'>
             <Link href={"/"} className='w-full flex justify-left items-center'>
-                <Image src={Logo} alt='cypress Logo' width={50} height={50}/>
+                <Image src={Logo} alt='FastNotesAi Logo' width={50} height={50} className='rounded-lg'/>
                 <span className='font-semibold dark:text-white text-4xl first-letter:ml-2 '>
-                    cypress.
+                    FastNotesAI.
                 </span>
             </Link>
             <FormDescription

@@ -12,7 +12,7 @@ interface SelectedFolderProps{
 
 const SelectedFolder:React.FC<SelectedFolderProps> = ({folder,onClick}) => {
     const supabase = createClientComponentClient()
-    const [folderLogo,setFolderLogo] = useState('/images/cypresslogo.svg')
+    const [folderLogo,setFolderLogo] = useState('/images/newLogo.png')
 
     useEffect(()=>{
         if(folder.bannerUrl){
@@ -25,7 +25,7 @@ const SelectedFolder:React.FC<SelectedFolderProps> = ({folder,onClick}) => {
         className='flex rounded-md hover:bg-muted transition-all flex-row
         p-2 gap-4 justify-center cursor-pointer items-center my-2 '
     >
-        <Image src={folderLogo} alt="folder logo" width={26} height={26} style={{objectFit:"cover",width:"auto",height:"auto"}}/>
+        <Image src={folderLogo} alt="folder logo" width={26} height={26} className='rounded-lg' style={{objectFit:"cover",width:"auto",height:"auto"}}/>
         <div className='flex flex-col'>
             <p className='
                 text-lg 

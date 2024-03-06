@@ -243,8 +243,11 @@ const QuillEditor:React.FC<QuillEditorProps> = ({
     };
     let selectedDir;
     const fetchInformation = async () => {
+      console.log("fetching info")
       if (dirType === 'file') {
         const { data: selectedDir, error } = await getFileDetails(fileId);
+        console.log("selectedDir: ",JSON.parse(selectedDir[0].data || "").ops[0], " error: ",error)
+        // console.log("selectedDir: ",selectedDir[0].data, " error: ",error)
         if (error || !selectedDir) {
           console.log("error while trying to fetch file details, ",error)
           return router.replace('/dashboard');
@@ -261,7 +264,10 @@ const QuillEditor:React.FC<QuillEditorProps> = ({
         if (!selectedDir[0].data) {
           return
         };
-        quill.setContents(JSON.parse(selectedDir[0].data || ''));
+        // quill.setContents(selectedDir[0]);
+        quill.setContents([
+          JSON.parse(selectedDir[0].data || "").ops[0],
+        ]);
         dispatch({
           type: 'UPDATE_FILE',
           payload: {
@@ -331,9 +337,9 @@ const QuillEditor:React.FC<QuillEditorProps> = ({
         await getSuggestion();
         if (suggestion) {
           console.log("suggestion exists: ",suggestion)
-          const quillLength = quill.getLength();
-          quill.insertText(quillLength, '' + suggestion, { 'italic': true, 'color': 'white' }); // Example formatting
-          quill.setSelection(quillLength + suggestion.toString().length); // Move cursor to the end of the suggestion
+          // const quillLength = quill.getLength();
+          // quill.insertText(quillLength, '' + suggestion, { 'italic': true, 'color': 'white' }); // Example formatting
+          // quill.setSelection(quillLength + suggestion.toString().length); // Move cursor to the end of the suggestion
         }
         if(contents && quillLength!==1 && fileId){
           if(dirType==="folder"){
